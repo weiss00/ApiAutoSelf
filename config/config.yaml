@@ -1,0 +1,9 @@
+# db-config
+host : 47.110.151.136
+user : vue_shop
+password : 5istudy_shop
+port : 3306
+database : vue_shop
+---
+# excel-path
+excel_path : ../test_data/test_data.xls
