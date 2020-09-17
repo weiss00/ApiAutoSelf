@@ -5,10 +5,13 @@ import openpyxl
 from common.read_config import ReadConfig
 from loguru import logger
 
-
 class ReadExcel(object):
-    def __init__(self):
-        self.excel_config = ReadConfig("excel_path").read_config()["excel_path"]
+
+    def __init__(self, file_key):
+        """
+        :param file_key: 配置文件中  【文件的key】
+        """
+        self.excel_config = ReadConfig(file_key).read_config_keyword()
         # logger.info(self.excel_config)
 
     def read_excel(self):
@@ -23,9 +26,11 @@ class ReadExcel(object):
             # logger.info(f"列数为{ncols}")
             if nrows > 1:
                 keys = sheet.row_values(0)
-                logger.info(f"第一行数据为{keys}")
+                # logger.info(f"第一行数据为{keys}")
             for row in range(1, nrows):
                 values = sheet.row_values(row)
+                # 去除用例标题
+                values.pop(0)
                 test_data.append(values)
             # print(test_data)
             return test_data
@@ -40,6 +45,6 @@ class ReadExcel(object):
         
 
 if __name__ == '__main__':
-    ed = ReadExcel()
+    ed = ReadExcel("excel_path_1")
     datas = ed.read_excel()
     print(datas)

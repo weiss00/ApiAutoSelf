@@ -28,13 +28,36 @@ class DB_Utils(object):
             logger.info(f'{result}, {type(result[0])}')
             return result[0]
         except Exception as e:
-            logger.info(f'{e}')
+            logger.error(f'{e}')
         finally:
-            self.cursor.close()
-            self.conn.close()
+            self.close_all()
+
+
+    def delete_item(self, sqls):
+        for sql in sqls:
+            try:
+                self.cursor.execute(sql)
+                count = self.cursor.rowcount
+                logger.info(f"受影响的行数为{count}")
+                self.conn.commit()
+            except Exception as e:
+                logger.error(f"删除数据是出错==>{e}")
+                self.conn.rollback()
+
+        self.close_all()
+
+
+    def close_all(self):
+        self.cursor.close()
+        self.conn.close()
 
 
 if __name__ == '__main__':
     db = DB_Utils()
-    sql = "select code from users_verifycode where mobile = '18844077779';"
-    db.select_item(sql)
+    # sql = "select code from users_verifycode where mobile = '18844077779';"
+    sqls = [
+        "delete from users_verifycode where mobile = '18844077777';",
+        "delete from users_userprofile where mobile = '18844077777';"
+            ]
+    # db.select_item(sql)
+    db.delete_item(sqls)

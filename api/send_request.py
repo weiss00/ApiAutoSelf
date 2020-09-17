@@ -14,7 +14,7 @@ class BaseRequest(object):
         """
 
         :param method: 请求方法
-        :param url: 请求url
+        :param url: 请求  url
         :param parametric_key: 入参关键字， get/delete/head/options/请求使用params,
          post/put/patch请求可使用json（application/json）/data
 
@@ -50,6 +50,5 @@ class BaseRequest(object):
             raise ValueError('可选关键字为：get/delete/head/options/请求使用params, post/put/patch请求可使用json（application/json）/data')
         logger.info(f'请求方法:{method}，请求路径:{url}, 请求参数:{data}, 请求文件:{files}, 请求头:{header})')
         return res.json()
-
 
 
