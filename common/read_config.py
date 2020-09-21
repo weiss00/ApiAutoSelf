@@ -6,19 +6,19 @@ import yaml
 
 class ReadConfig(object):
 
-    def __init__(self, keyword):
+    def __init__(self):
         self.filepath = "../config/config.yaml"
-        self.keyword = keyword
+        # self.keyword = keyword
 
-    def read_config_keyword(self):
+    def read_config_keyword(self, keyword):
         with open(self.filepath, 'r') as f:
             self.config = yaml.load_all(f, Loader=yaml.FullLoader)
             for item in self.config:
-                if item.get(self.keyword):
+                if item.get(keyword):
                     # print(item.get(self.keyword))
-                    return item.get(self.keyword)
+                    return item.get(keyword)
 
-    def read_config(self):
+    def read_config_items(self):
         with open(self.filepath, 'r') as f:
             self.config = yaml.load_all(f, Loader=yaml.FullLoader)
             for item in self.config:

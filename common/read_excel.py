@@ -21,7 +21,7 @@ class ReadExcel(object):
             sheet = wb.sheet_by_index(0)
         # 获取最大行数和列数
             nrows = sheet.nrows
-            # logger.info(f"行数为{nrows}")
+            # logger.info(f"行数为{nrows}") 
             ncols = sheet.ncols
             # logger.info(f"列数为{ncols}")
             if nrows > 1:
@@ -47,4 +47,4 @@ class ReadExcel(object):
 if __name__ == '__main__':
     ed = ReadExcel("excel_path_1")
     datas = ed.read_excel()
-    print(datas)
+    print(datas[0])

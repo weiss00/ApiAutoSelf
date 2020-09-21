@@ -9,5 +9,5 @@ database: vue_shop
 excel_path_1 : ../test_data/test_data_1.xls
 excel_path : ../test_data/test_data.xls
 ---
-# upload-path
-#upload-path : ../upload_file
+# json-config
+json_path: ../test_data/test_json.json

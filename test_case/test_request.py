@@ -10,7 +10,7 @@ class Test_Req(object):
 
     def __init__(self):
         self.data_list = ReadExcel("excel_path_1").read_excel()
-        # logger.info(f"获得的数据列表为{self.data_list}")
+        logger.info(f"获得的数据列表为{self.data_list}")
         self.request = BaseRequest()
 
     def get_code(self):
@@ -27,4 +27,5 @@ class Test_Req(object):
 
 if __name__ == '__main__':
     req = Test_Req()
-    req.get_code()
+    # req.get_code()
+

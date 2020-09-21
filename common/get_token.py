@@ -4,14 +4,20 @@
 获取token
 """
 
-from api.send_request import BaseRequest
-
 class Get_Token(object):
 
-    def __init__(self):
-        BaseRequest().base_requests()
+    token = ""
 
-    def get_token(self):
-        pass
+    @classmethod
+    def get_header(self, token):
+        Get_Token.token =  {
+            "Authorization": "JWT " + token
+        }
+        return Get_Token.token
 
+
+if __name__ == '__main__':
+    print(Get_Token.token + "==")
+    print(Get_Token.get_header("333"))
+    print(Get_Token.token)
 

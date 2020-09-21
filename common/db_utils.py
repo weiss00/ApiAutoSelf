@@ -11,7 +11,7 @@ class DB_Utils(object):
     # logger.info(lists)
     # 初始化db连接
     def __init__(self):
-        host, user, password, port, database = [v for k, v in ReadConfig("host").read_config().items()]
+        host, user, password, port, database = [v for k, v in ReadConfig("host").read_config_items().items()]
         self.conn = pymysql.connect(
             host=host,
             user=user,
