@@ -58,6 +58,8 @@ class Get_Data(object):
     # 通过关键字拿到data数据
     def get_data_for_json(self, row):
         data = self.opera_json.get_data(self.get_request_data(row))
+        if data == "":
+            return None
         return data
 
     # 获取预期结果
@@ -75,7 +77,5 @@ class Get_Data(object):
 
 if __name__ == '__main__':
     excel = Get_Data()
-    # request_json = excel.get_request_data(2)
-    # print()
     header = excel.is_header(4)
     logger.info(f"reqeust_json is {header}")

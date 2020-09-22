@@ -8,6 +8,7 @@ database: vue_shop
 # excel-path
 excel_path_1 : ../test_data/test_data_1.xls
 excel_path : ../test_data/test_data.xls
+excel_copy: ../test_data/result/result_1.xls
 ---
 # json-config
 json_path: ../test_data/test_json.json

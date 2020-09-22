@@ -15,13 +15,15 @@ class Operation_Json(object):
 
     def get_data(self, keyword=None):
         try:
-            with open(self.json_path) as f:
-                data = json.load(f)[keyword]
-                # print(data)
-                if data == None:
-                    raise Exception("读取数据有误")
-                else:
-                    return data
+            if keyword != None and keyword != '':
+                with open(self.json_path) as f:
+                    data = json.load(f)[keyword]
+                    if data == None:
+                        raise Exception("读取数据有误")
+                    else:
+                        return data
+            else:
+                return ""
         except Exception as e:
             logger.error(f"读取文件出错====>{e}")
 

@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 import time
+import os
 import xlrd
 from xlutils.copy import copy
 from common.read_config import ReadConfig
@@ -11,6 +12,9 @@ class Operation_Excel(object):
         self.excel_path = ReadConfig().read_config_keyword("excel_path_1")
         self.book = xlrd.open_workbook(self.excel_path)
         self.table = self.book.sheet_by_index(0)
+        self.excel_copy = ""
+        self.copy_book = ""
+        self.copy_table = ""
 
     # 获取excel的sheet表
     # def get_sheet(self, index=0):
@@ -48,11 +52,16 @@ class Operation_Excel(object):
        '''
 
     def write_excel(self, row, col, value):
-        new_excel = copy(self.book)
-        new_sheet = new_excel.get_sheet(0)
-        new_sheet.write(row, col, value)
-        time_format = time.strftime('%Y%m%d-%H%M%S', time.localtime())
-        new_excel.save(f"../test_data/result/result-{time_format}.xls")
+        if os.path.exists(self.excel_copy) == False:
+            self.copy_book = copy(self.book)
+            self.copy_table = self.copy_book.get_sheet(0)
+            self.copy_table.write(row, col, value)
+            self.excel_copy = ReadConfig().read_config_keyword("excel_copy")
+            # time_format = time.strftime('%Y%m%d-%H%M%S', time.localtime())
+            self.copy_book.save(self.excel_copy)
+        else:
+            self.copy_table.write(row, col, value)
+            self.copy_book.save(self.excel_copy)
 
 if __name__ == '__main__':
     Operation_Excel().write_excel(4, 4, "asda")

@@ -22,7 +22,9 @@ class RunTest:
             method = self.get_data.get_request_method(i)
             url = self.get_data.get_url(i)
             data = self.get_data.get_data_for_json(i)
+            logger.info(f"data is {data}")
             expect_data = self.get_data.get_except_data(i)
+            # logger.info(f"预期结果为 === > {expect_data}")
             header = self.get_data.is_header(i)
 
     #         method, url, data, header
@@ -35,7 +37,7 @@ class RunTest:
                     self.get_data.write_result(i, "pass")
                 else:
                     self.get_data.write_result(i, "fail")
-                logger.info(f" res is =========> {res}")
+                # logger.info(f" res is =========> {res}")
 
     # def test_demo(self):
 
