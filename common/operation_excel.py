@@ -1,10 +1,9 @@
 # -*- coding:utf-8 -*-
 
-import time
-import os
 import xlrd
 from xlutils.copy import copy
 from common.read_config import ReadConfig
+from tools.time_format import Time_Format
 
 class Operation_Excel(object):
 
@@ -15,10 +14,6 @@ class Operation_Excel(object):
         self.excel_copy = ""
         self.copy_book = ""
         self.copy_table = ""
-
-    # 获取excel的sheet表
-    # def get_sheet(self, index=0):
-    #     return self.book.sheet_by_index(index)
 
     #  获取excel总行数
     def get_rows(self):
@@ -50,18 +45,50 @@ class Operation_Excel(object):
            #4 - 保存excel对象
            newWorkBook.save(r'../data/res.xls')
        '''
-
+    # 将测试结果写入到excel中
     def write_excel(self, row, col, value):
-        if os.path.exists(self.excel_copy) == False:
+        if self.copy_book == "":
             self.copy_book = copy(self.book)
             self.copy_table = self.copy_book.get_sheet(0)
             self.copy_table.write(row, col, value)
-            self.excel_copy = ReadConfig().read_config_keyword("excel_copy")
-            # time_format = time.strftime('%Y%m%d-%H%M%S', time.localtime())
-            self.copy_book.save(self.excel_copy)
+            new_path = f"../test_data/result/result_{Time_Format.format_time()}.xls"
+            self.copy_book.save(new_path)
         else:
             self.copy_table.write(row, col, value)
-            self.copy_book.save(self.excel_copy)
+            new_path = f"../test_data/result/result_{Time_Format.format_time()}.xls"
+            self.copy_book.save(new_path)
+
+    # 根据对应的case_id找到相应的行
+    def get_line_caseId(self, case_id):
+        num = self.get_num_caseId(case_id)
+        return self.get_row_values(num)
+
+    # 根据对应的case_id找到相应的行号
+    def get_num_caseId(self, case_id):
+        num = 0
+        cols = self.get_cols_data()
+        print(cols)
+        for col_data in cols:
+            if case_id in col_data:
+                return num
+            num += 1
+        return num
+
+    # 根据行号，找到该行的内容
+    def get_row_values(self, row):
+        row_data = self.table.row_values(row)
+        return row_data
+
+    # 获取某一列内容
+    def get_cols_data(self, col_id=None):
+        if col_id != None:
+            cols = self.table.col_values(col_id)
+        else:
+            cols = self.table.col_values(0)
+        return cols
 
 if __name__ == '__main__':
-    Operation_Excel().write_excel(4, 4, "asda")
+    c = Operation_Excel()
+    num = c.get_num_caseId("demo-4")
+    data = c.get_line_caseId(num)
+    print(data)

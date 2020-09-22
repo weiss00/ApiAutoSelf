@@ -43,4 +43,3 @@ class RunTest:
 
 if __name__ == '__main__':
     res = RunTest().go_on_run()
-    # logger.info(f"res is {res}")
