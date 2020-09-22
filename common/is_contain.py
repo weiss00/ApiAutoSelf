@@ -15,6 +15,8 @@ class Is_Contain(object):
         :return:
         """
         flag = None
+
+
         if str_1 in str_2:
             flag = True
         else:

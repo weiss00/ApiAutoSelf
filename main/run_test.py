@@ -1,11 +1,10 @@
 # -*- coding:utf-8 -*-
 
-import pytest
-from api.run_method import RunMethod
-from data.get_data import Get_Data
 from loguru import logger
+from api.run_method import RunMethod
 from common.get_token import Get_Token
 from common.is_contain import Is_Contain
+from data.get_data import Get_Data
 
 class RunTest:
     def __init__(self):
@@ -25,19 +24,18 @@ class RunTest:
             data = self.get_data.get_data_for_json(i)
             expect_data = self.get_data.get_except_data(i)
             header = self.get_data.is_header(i)
+
     #         method, url, data, header
             if is_run:
                 res = self.run_method.run_main(method, url, data, header)
+                # if ("token" in res):
+                #     Get_Token.get_header(res['token'])
                 compare_result = self.compare.is_contain(expect_data, res)
                 if compare_result:
-                    print("测试通过")
+                    self.get_data.write_result(i, "pass")
                 else:
-                    print("测试失败")
+                    self.get_data.write_result(i, "fail")
                 logger.info(f" res is =========> {res}")
-                if("token" in res):
-                    Get_Token.get_header(res['token'])
-                    return
-        return res
 
     # def test_demo(self):
 

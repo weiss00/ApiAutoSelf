@@ -1,10 +1,14 @@
 # -*- coding:utf-8 -*-
 
-from common.operation_excel import Operation_Excel
-from data.data_config import Global_Var
-from common.operation_json import Operation_Json
 from loguru import logger
+from data.data_config import Global_Var
+from common.operation_excel import Operation_Excel
+from common.operation_json import Operation_Json
 from common.get_token import Get_Token
+
+"""
+获取excel中特定数据工具类
+"""
 
 class Get_Data(object):
 
@@ -62,6 +66,11 @@ class Get_Data(object):
         if except_data == '':
             return None
         return except_data
+
+    # 向excel复制表中写数据
+    def write_result(self, row , value):
+        col = Global_Var.get_result()
+        self.opera_excel.write_excel(row, col, value)
 
 
 if __name__ == '__main__':

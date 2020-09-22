@@ -32,4 +32,4 @@ class RunMethod(object):
             res = self.post_main(url, data, header)
         else:
             res = self.get_main(url, data, header)
-        return json.dumps(res, indent=2, ensure_ascii=False, sort_keys=True   )
+        return json.dumps(res, indent=2, ensure_ascii=False, sort_keys=True)

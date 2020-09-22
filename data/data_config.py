@@ -17,9 +17,9 @@ class Global_Var:
     const.HEADER = 7
     const.REQUEST_DATA = 8
     const.EXCEPT = 9
-    const.RESULT = 10
-    const.DATA_TYPE = 11
-    const.RUN = 12
+    const.DATA_TYPE = 10
+    const.RUN = 11
+    const.RESULT = 12
 
     # 获取case_id
     @classmethod
