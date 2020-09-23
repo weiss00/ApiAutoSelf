@@ -69,6 +69,23 @@ class Get_Data(object):
             return None
         return except_data
 
+    # 获取依赖数据case_id
+    def get_depend_caseId(self, row):
+        case_id = self.opera_excel.get_cell_value(row, Global_Var.get_depend_id())
+        return case_id
+
+    # 获取依赖数据的表达式
+    def get_depend_expr(self, row):
+        depend_expr = self.opera_excel.get_cell_value(row, Global_Var.get_depend_data())
+        return depend_expr
+
+    # 获取依赖数据对应字段
+    def get_depend_dataName(self, row):
+        key = self.opera_excel.get_cell_value(row, Global_Var.get_depend_data_name())
+        if key == None and key == "":
+            return None
+        return key
+
     # 向excel复制表中写数据
     def write_result(self, row , value):
         col = Global_Var.get_result()

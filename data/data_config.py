@@ -41,10 +41,10 @@ class Global_Var:
     def get_depend_id(cls):
         return cls.const.DEPEDN_ID
 
-    # 获取依赖数据
+    # 获取依赖数据表达式
     @classmethod
     def get_depend_data(cls):
-        return cls.const.DEPEDN_DATA
+        return cls.const.DEPEND_DATA
 
     # 获取依赖数据的字段
     @classmethod

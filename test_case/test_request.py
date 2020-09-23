@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import json
 from api.send_request import BaseRequest
 from common.read_excel import ReadExcel
 from loguru import logger
-import json
 from common.db_utils import DB_Utils
 
 class Test_Req(object):

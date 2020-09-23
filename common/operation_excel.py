@@ -58,37 +58,36 @@ class Operation_Excel(object):
             new_path = f"../test_data/result/result_{Time_Format.format_time()}.xls"
             self.copy_book.save(new_path)
 
-    # 根据对应的case_id找到相应的行
-    def get_line_caseId(self, case_id):
-        num = self.get_num_caseId(case_id)
-        return self.get_row_values(num)
+    # 根据列号获取整列数据
+    def get_colData_index(self, col_num=None):
+        if col_num != None:
+            col_datas = self.table.col_values(col_num)
+        else:
+            col_datas = self.table.col_values(0)
+        return col_datas
 
-    # 根据对应的case_id找到相应的行号
-    def get_num_caseId(self, case_id):
+    #  传行数获得整行数据
+    def get_rowData_index(self, num):
+        row_data= self.table.row_values(num)
+        return row_data
+
+    # 传入case_id 得到该case_id所在的行数
+    def get_index_caseId(self, case_id):
         num = 0
-        cols = self.get_cols_data()
-        print(cols)
-        for col_data in cols:
-            if case_id in col_data:
+        cols_data = self.get_colData_index()
+        for col_data in cols_data:
+            if case_id == col_data:
                 return num
             num += 1
         return num
 
-    # 根据行号，找到该行的内容
-    def get_row_values(self, row):
-        row_data = self.table.row_values(row)
+    # 传入case_id 返回该case_id的行内容
+    def get_rowData_caseId(self, case_id):
+        num = self.get_index_caseId(case_id)
+        row_data = self.get_rowData_index(num)
         return row_data
-
-    # 获取某一列内容
-    def get_cols_data(self, col_id=None):
-        if col_id != None:
-            cols = self.table.col_values(col_id)
-        else:
-            cols = self.table.col_values(0)
-        return cols
 
 if __name__ == '__main__':
     c = Operation_Excel()
-    num = c.get_num_caseId("demo-4")
-    data = c.get_line_caseId(num)
-    print(data)
+    count = c.get_index_caseId("demo-1")
+    print(count)
