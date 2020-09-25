@@ -39,7 +39,7 @@ class Global_Var:
     # 获取依赖id
     @classmethod
     def get_depend_id(cls):
-        return cls.const.DEPEDN_ID
+        return cls.const.DEPEND_ID
 
     # 获取依赖数据表达式
     @classmethod
@@ -90,6 +90,4 @@ class Global_Var:
         return header
 
 if __name__ == '__main__':
-    # url = Global_Var.get_id()
-    # run = Global_Var.get_run()
     print(Global_Var.get_header_value())

@@ -31,6 +31,14 @@ class Get_Data(object):
             flag = False
         return flag
 
+    #  获取case_id
+    def get_id(self, row):
+        case_id = self.opera_excel.get_cell_value(row, Global_Var.get_id())
+        if case_id:
+            return case_id
+        else:
+            return None
+
     # 是否携带header
     def is_header(self, row):
         is_header = self.opera_excel.get_cell_value(row, Global_Var.get_header())
@@ -72,7 +80,10 @@ class Get_Data(object):
     # 获取依赖数据case_id
     def get_depend_caseId(self, row):
         case_id = self.opera_excel.get_cell_value(row, Global_Var.get_depend_id())
-        return case_id
+        if case_id != None:
+            return case_id
+        else:
+            return None
 
     # 获取依赖数据的表达式
     def get_depend_expr(self, row):

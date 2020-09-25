@@ -1,13 +1,15 @@
 # -*- coding:utf-8 -*-
-import json
 
+import json
 import requests
+from mock.mock_func import Mock_Test
 
 """
     简单封装get / post 基类
 """
 
 class RunMethod(object):
+
 
     def post_main(self, url, data, header=None):
         res = None
@@ -33,3 +35,10 @@ class RunMethod(object):
         else:
             res = self.get_main(url, data, header)
         return json.dumps(res, indent=2, ensure_ascii=False, sort_keys=True)
+
+#     mock 模拟请求
+#     mock_method, request_data, url, method, response_data
+    def mock_test(self, method, url, data, header=None):
+        mock_response = {"success":200}
+        mock = Mock_Test(self.run_main, method, url, data, mock_response, header=None)
+        mock.mock_test()
